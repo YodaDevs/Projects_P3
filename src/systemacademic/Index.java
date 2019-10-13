@@ -11,7 +11,7 @@ public class Index {
 	 *
 	 *	     																( Info basic of Participants )
 	 * 			0 					1						2					3					4					5						6			7					8		
-	 *  Name of Participant | Associated Project | Type of Participant | Number of Papers | Number of guidelines | Titles of Papers | Name of Conference | Year | Research Associated (if have) |
+	 * Associated Project | Name of Participant | Type of Participant | Number of Papers | Number of guidelines | Titles of Papers | Name of Conference | Year | Research Associated (if have) |
 	 * 
 	 * 
 	 * */
@@ -23,73 +23,34 @@ public class Index {
 	
 	public static void main(String[] args) {
 		
-		int key = -1, key_prof = -1, key_p = -1, key_manager = -1, columm = 0;
+		int key = -1, key_adm = -1, key_p = -1, columm = 0, index_projectForParticipant;
 		int index_projects = 0, index_participants = 0, day, month, year;
-		String start,login, password, key1;
+		String login, password, key1, projectParticipant;
 		
 		Scanner input = new Scanner(System.in);
 		
 		while (key != 0) {
 			System.out.println("Welcome to Jitlab (Just in time labory) ");
-			System.out.println("Login or Exit?");
-			start = input.nextLine();
-			
-			if(start.equals("Exit") || start.equals("exit")) {
-				input.close();
-				System.exit(0);
-			}
 			
 			//reset variables
-			key_manager = -1;
-			key_prof = -1;
+			key_adm = -1;
 			
 			System.out.println("Login: ");
 			login = input.nextLine();				
 			System.out.println("Password: ");
 			password = input.nextLine();
 			
-			// Manager options
-			if(login.equals("manager") && password.equals("123")) {
-				System.out.println("Sucess\nWelcome Manager \n");
-				while(key_manager != 0) {
-					System.out.println("What do you want to do?");
-					System.out.println("(1) - Show projects");
-					System.out.println("(2) - Edit status of projects");
-					System.out.println("(0) - Sign out");
-					
-					key_p = input.nextInt();
-					input.nextLine();
-					
-					switch (key_p) {
-					
-						case 1:
-							show_projects();
-							break;
-						case 2:
-							edit_projects();
-							break;
-						case 0:
-							key_manager = 0;
-							break;
-						default:
-							System.out.println("\nError #404 \n Invalid Input");
-					
-					}
-					
-					
-				}	
-			}
-			
-			// Professor options
-			else if(login.equals("professor") && password.equals("123")) {
-				System.out.println("Sucess\nWelcome Professor \n");
-				while(key_prof != 0) {
+			if(login.equals("admin") && password.equals("123")) {
+				System.out.println("Sucess\nWelcome Administrator\n");
+				while(key_adm != 0) {
 						System.out.println("What do you want to do?");
 						System.out.println("(1) - Add Project");
 						System.out.println("(2) - Add Participants");
-						System.out.println("(3) - Add Paper");
-						System.out.println("(4) - Add Student Oriented");
-						System.out.println("(5) - Edit Project");
+						System.out.println("(3) - Edit Project");
+						System.out.println("(4) - Edit status of projects");
+						System.out.println("(5) - Edit Participants");
+						System.out.println("(6) - Add Paper");
+						System.out.println("(7) - Add Student Oriented");
 						System.out.println("(0) - Sign out");
 						
 						key_p = input.nextInt();
@@ -212,24 +173,43 @@ public class Index {
 							break;
 							
 						case 2:
-							System.out.println("Name of participant:");
+							System.out.println("Associated Project: (Title of project)");
 							columm = 0;
-							participants[index_participants][columm] = input.nextLine();
-							/*  Name of Participant | Associated Project | Type of Participant | Number of Papers | Number of guidelines | Titles of Papers | Name of Conference | Year | Research Associated (if have) |*/
+							projectParticipant = input.nextLine();
+							
+							index_projectForParticipant = search_Projects();
+							
+							if(!(projects[index_projectForParticipant][8].equals("In preparation"))) {
+								System.out.println("This project isn't in preparation, you can't add participants");
+								break; 
+							}
+							
+							participants[index_participants][columm] = projectParticipant;
+							
 							index_participants++;					
 				
-							System.out.println("Associated Project: (Title of project)"); // Chamar metodo que listar� os projetos disponiveis e o professor ter� a op��o de escolher (1), (2), projetos ao estudante. 
+							System.out.println("Name of participant:"); 
 							columm++;
 							participants[index_participants-1][columm] = input.nextLine();					
 						
-							System.out.println("Type of Participant: (Example: Student of Graduation)"); 
+							System.out.println("Type of Participant:");
+							System.out.println("(1) Graduation Student");
+							System.out.println("(2) Master degree Student");
+							System.out.println("(3) Doctorate Student");
+							System.out.println("(4) Professor");
+							System.out.println("(5) Researcher");
+							
 							columm++;
 							participants[index_participants-1][columm] = input.nextLine();											
 						    
 						    break;
 							
+						case 4:
+							edit_statusProjects();
+							break;
+							
 						case 0:
-							key_prof = 0;
+							key_adm = 0;
 							break;
 						default:
 							System.out.println("\nError #404 \n Invalid Input");
@@ -239,13 +219,13 @@ public class Index {
 						
 					}
 				}
-		
+
+			else {
+				input.close();
+				System.exit(0);
+			}
 			
 		}
-
-		input.close();
-		System.exit(0);
-
 	}
 	
 	
@@ -286,12 +266,12 @@ public class Index {
 		
 	}
 	
-	public static void edit_projects() {
+	public static void edit_statusProjects() {
 		String title, answer;
 		int index_editTitle;
 		System.out.println("What the title of project you want to change status?");
 		title = input.nextLine();
-		index_editTitle = search_projects(title);]
+		index_editTitle = search_Projects(title);]
 		System.out.println("This project is: " + projects[index_editTitle][8]);
 		System.out.println("Change for completed? Yes or No");
 		answer = input.nextLine();
@@ -307,7 +287,7 @@ public class Index {
 		
 	}
 	
-	public static int search_projects(String title) {
+	public static int search_Projects(String title) {
 		for (int l = 0; l < projects.length; l++) {
 			if(projects[l][0].equals(title))
 				return l;
