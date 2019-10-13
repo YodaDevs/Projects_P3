@@ -54,6 +54,7 @@ public class Index {
 				while(key_manager != 0) {
 					System.out.println("What do you want to do?");
 					System.out.println("(1) - Show projects");
+					System.out.println("(2) - Edit status of projects");
 					System.out.println("(0) - Sign out");
 					
 					key_p = input.nextInt();
@@ -63,6 +64,9 @@ public class Index {
 					
 						case 1:
 							show_projects();
+							break;
+						case 2:
+							edit_projects();
 							break;
 						case 0:
 							key_manager = 0;
@@ -280,6 +284,34 @@ public class Index {
 		     
 		 }  
 		
+	}
+	
+	public static void edit_projects() {
+		String title, answer;
+		int index_editTitle;
+		System.out.println("What the title of project you want to change status?");
+		title = input.nextLine();
+		index_editTitle = search_projects(title);]
+		System.out.println("This project is: " + projects[index_editTitle][8]);
+		System.out.println("Change for completed? Yes or No");
+		answer = input.nextLine();
+		if(answer.equals("Yes") || answer.equals("Y") || answer.equals("y") || answer.equals("yes")) {
+			projects[index_editTitle][8] = "completed";
+			System.out.println("Project Status now is " + projects[index_editTitle][8]);
+		}
+		else {
+			System.out.println("Project Status still " + projects[index_editTitle][8]);
+		}
+			
+		
+		
+	}
+	
+	public static int search_projects(String title) {
+		for (int l = 0; l < projects.length; l++) {
+			if(projects[l][0].equals(title))
+				return l;
+		}
 	}
 	
 }	
