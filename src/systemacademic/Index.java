@@ -20,15 +20,14 @@ public class Index {
 	 * 
 	 * */
 	
-	
 	static int line_projects = 100, columm_projects = 9 , line_collaborator = 100 , columm_collaborator = 9;
 	static String [][] projects = new String[line_projects][columm_projects];
 	static String [][] collaborator = new String[line_collaborator][columm_collaborator];
 	
 	public static void main(String[] args) {
 		
-		int key = -1, key_adm = -1, key_p = -1, columm = 0, index_projectForParticipant;
-		int index_projects = 0, index_participants = 0, day, month, year, typePart;
+		int key = -1, key_adm = -1, key_p = -1, index_projectForParticipant;
+		int index_projects = -1, index_participants = 0, day, month, year, typePart;
 		String login, password, key1, projectParticipant;
 		
 		Scanner input = new Scanner(System.in);
@@ -63,28 +62,27 @@ public class Index {
 						switch (key_p) {
 						case 1:
 							System.out.println("Title of Project:");
-							columm = 0;
-							projects[index_projects][columm] = input.nextLine();
 							
 							index_projects++;
+							projects[index_projects][0] = input.nextLine();
 							
-							projects[index_projects-1][8] = "In preparation";
+							projects[index_projects][8] = "In preparation";
 							
 							System.out.println("Continue? (Yes or No)");
 							key1 = input.nextLine();					
 							
 							if(key1.equals("Yes") || key1.equals("Y") || key1.equals("y")) {
 								System.out.println("Intention of Project:"); 
-								columm++;
-								projects[index_projects-1][columm] = input.nextLine();					
+							
+								projects[index_projects][1] = input.nextLine();					
 						
 								System.out.println("Description of Project:"); 
-								columm++;
-								projects[index_projects-1][columm] = input.nextLine();								
+								
+								projects[index_projects][2] = input.nextLine();								
 					
 								System.out.println("Number of collaborator of Project:"); 
-								columm++;
-								projects[index_projects-1][columm] = input.nextLine();
+								
+								projects[index_projects][3] = input.nextLine();
 								
 								System.out.println("Continue to complete the date? \n (Yes or No)");
 								key1 = input.nextLine();
@@ -120,8 +118,8 @@ public class Index {
 										input.nextLine();
 									}
 									
-									columm++;
-									projects[index_projects-1][columm] = (Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year) );
+									
+									projects[index_projects][4] = (Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year) );
 									
 									System.out.println("Final Date of Project:"  + "\nDay: ");
 									
@@ -153,20 +151,20 @@ public class Index {
 										input.nextLine();
 									}
 									
-									columm++;		
-									projects[index_projects-1][columm] = (Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year) );
+											
+									projects[index_projects][5] = (Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year) );
 									
 									System.out.println("Continue to complete Funding Agency of project? (Yes or No)");
 									key1 = input.nextLine();
 									
 									if(key1.equals("Yes") || key1.equals("Y")  || key1.equals("y")) {
 										System.out.println("Funding Agency of Project:");
-										columm++;
-										projects[index_projects-1][columm] = input.nextLine();										
+										
+										projects[index_projects][6] = input.nextLine();										
 										
 										System.out.println("Value of Funding Agency:");
-										columm++;
-										projects[index_projects-1][columm] = input.nextLine();	
+										
+										projects[index_projects][7] = input.nextLine();	
 									}
 								}
 							}
@@ -736,3 +734,4 @@ public class Index {
 	}
 	
 }	
+
