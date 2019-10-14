@@ -20,6 +20,7 @@ public class Index {
 	 * 
 	 * */
 	
+	
 	static int line_projects = 100, columm_projects = 9 , line_collaborator = 100 , columm_collaborator = 9;
 	static String [][] projects = new String[line_projects][columm_projects];
 	static String [][] collaborator = new String[line_collaborator][columm_collaborator];
@@ -27,7 +28,7 @@ public class Index {
 	public static void main(String[] args) {
 		
 		int key = -1, key_adm = -1, key_p = -1, index_projectForParticipant;
-		int index_projects = -1, index_participants = 0, day, month, year, typePart;
+		int index_projects = -1, index_participants = -1, day, month, year, typePart;
 		String login, password, key1, projectParticipant;
 		
 		Scanner input = new Scanner(System.in);
@@ -54,6 +55,7 @@ public class Index {
 						System.out.println("(5) - Edit Collaborator");
 						System.out.println("(6) - Show Projects");
 						System.out.println("(7) - Show collaborator");
+						System.out.println("(8) - Show Academic Report");
 						System.out.println("(0) - Sign out");						
 						
 						key_p = input.nextInt();
@@ -173,10 +175,10 @@ public class Index {
 						case 2:
 							
 							System.out.println("Name of Collaborator");
-							
+							index_participants++;
 							collaborator[index_participants][0] = input.nextLine();
 							
-							System.out.println("E-mail of Collaborator (like: ****@gmail.com"); //validar somente e-mail
+							System.out.println("E-mail of Collaborator (like: ****@gmail.com"); //validar o e-mail
 							
 							collaborator[index_participants][1] = input.nextLine();
 							
@@ -206,15 +208,19 @@ public class Index {
 							
 							index_projectForParticipant = search_Projects(projectParticipant);
 							
-							if(!(projects[index_projectForParticipant][8].equals("In preparation"))) {
+							if(index_projectForParticipant < 0) {
+								System.out.println("Error: Project not Found! Try Edit Collaborator");
+								break;
+							}
+							
+							if( index_projectForParticipant >= 0 && !(projects[index_projectForParticipant][8].equals("In preparation"))) {
 								System.out.println("This project isn't in preparation, you can't add collaborator");
 								break; 
 							}
 							
 							collaborator[index_participants][3] = projectParticipant;				
-							System.out.println("If you wanna to add Papers, Guidelines or more, try to Edit Collaborator");
-																	
-						    index_participants++;
+							System.out.println("If you wanna to add Papers, Guidelines or more, try Edit Collaborator");
+																						
 						    break;
 							
 						case 3:
@@ -231,6 +237,9 @@ public class Index {
 							break;
 						case 7:
 							
+							break;
+						case 8:
+							showReport();
 							break;
 						case 0:
 							key_adm = 0;
@@ -719,7 +728,7 @@ public class Index {
 	
 	public static int search_Projects(String title) {
 		for (int l = 0; l < projects.length; l++) {
-			if(projects[l][0].equals(title))
+			if(projects[l][0] != null && projects[l][0].equals(title))
 				return l;
 		}
 		return -1;
@@ -733,5 +742,58 @@ public class Index {
 		return -1;
 	}
 	
+	public static void showReport() {
+		int col = 0;
+		int projPre = 0;
+		int projPro = 0;
+		int projCom = 0;
+		int totalProj = 0;
+		int prodGui = 0;
+		int prodPaper = 0;
+		int j,k;
+		String preparation = "In preparation";
+		String progress = "In progress";
+		String completed = "Completed";
+		
+		
+		for(j = 0; j < collaborator.length ; j++) {
+			if(collaborator[j][0] != null) col++;
+				
+			if(collaborator[j][4] != null ) {
+				String guideline[] = collaborator[j][4].split("|"); // Student Guideline
+				for(k = 0; k < guideline.length; k++) {
+					prodGui++;
+				}
+					
+			}
+				
+			if(collaborator[j][5] != null) {
+				String papers[] = collaborator[j][4].split("|"); // Papers
+				for(k = 0; k < papers.length; k++) {
+					prodPaper++;
+				} 
+			}
+		}
+		
+		
+		for(j = 0; j < projects.length ; j++) {
+			if(projects[j][8] != null) {
+				if(projects[j][8].equals(preparation)) projPre++;
+				if(projects[j][8].equals(progress)) projPro++;
+				if(projects[j][8].equals(completed)) projCom++;
+			}
+		}
+		
+		totalProj = projPre + projPro + projCom;
+		
+		System.out.println("Número de colaboradores: " + col);
+		System.out.println("Número de projetos em elaboração: " + projPre);
+		System.out.println("Número de projetos em andamento: " + projPro);
+		System.out.println("Número de projetos concluídos: " + projCom);
+		System.out.println("Número total de projetos: " + totalProj);		
+		System.out.println("Número de produção acadêmica por tipo de produção: " + "\nPapers: "+ prodPaper + "\nGuidelines: " + prodGui);
+		
+		
+	}
+	
 }	
-
