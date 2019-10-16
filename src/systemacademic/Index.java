@@ -936,7 +936,7 @@ public class Index {
 	// Search one collaborator and give us Integer that's index of collaborator in string[][]collaborator
 	public static int search_Collaborator(String name) {
 		for (int l = 0; l < collaborator.length; l++) {
-			if(collaborator[l][0].equals(name))
+			if(collaborator[l][0] != null && collaborator[l][0].equals(name))
 				return l;
 		}
 		return -1;
