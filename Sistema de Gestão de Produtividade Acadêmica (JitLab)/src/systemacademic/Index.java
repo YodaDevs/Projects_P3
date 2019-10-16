@@ -4,27 +4,27 @@ import java.util.Scanner;
 public class Index {
 
 	
-	/*	  																	     ( Info basic of Projects)
-	 *			0  					1			     2					3					  4				5				6				      7						8			
+	/*	  					  ( Info basic of Projects)
+	 *	0  			1 	        2		    3			  4		5		6		     7				8			
 	 * Title of Project | Intention of Project | Description |  Number of collaborator | Initial Date | Finish Date | Funding Agency | Value of Funding Agency | Status of Project | 
 	 *       
 	 *
-	 *	     															       	( Info basic of Collaborator )
-	 * 			0 		       1	  		 2					   3					     4					 5			       6	         7			 	  8		        			
+	 *	     				     	( Info basic of Collaborator )
+	 * 		0 	    1	  	 2			   3		     4			 5		       6	      7		 	  8		        			
 	 * Name of collaborator | E-mail | Type of Participant | Associated Project | Students Guidelines | Titles of Papers | Name of Conference | Year | Research Associated (if have) | 
 	 * 
 	 * 
-	 * 																			(Info basic of Production Academic)
-	 *         0					1						2					3					4				5		   	
+	 * 						(Info basic of Production Academic)
+	 *         0			1			2			3		4		5		   	
 	 * Title of Project | Collaborators of Project | Students Guidelines | Titles of Papers | Name of Conference | Year |
 	 * 
-	 *																			(Info basic of Collaborator History)
-	 * 																  0				  1			  3
-	 * 													Collaborators of Project | Project |  Finish Date |
+	 *						(Info basic of Collaborator History)
+	 * 						  0		     1		  3
+	 * 					Collaborators of Project | Project |  Finish Date |
 	 * 
-	 * 																					Status of Project
+	 * 							Status of Project
 	 * 			
-	 * 																		In preparation -> In progress -> Completed
+	 * 					In preparation -> In progress -> Completed
 	 * 
 	 * Login: admin
 	 * password: 123
