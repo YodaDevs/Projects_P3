@@ -52,15 +52,23 @@ class Admin extends Login implements Person {
         }
 
         if (objPerson instanceof Client) {
+            ((Client)objPerson).setCashClient(100);
             System.out.println("Do you have favorite drinks? Y or N");
             in = input.nextLine();
             if (in.equalsIgnoreCase("Y")) {
 
-                System.out.println("Have this options:");
+                System.out.println("We have this options:");
                 for (Drinks num : drinks) {
                     System.out.println(num.toString()); // Show names of drinks
                 }
-
+                if(drinks.isEmpty()) System.out.println("Sorry, we don't have drinks yet");
+                System.out.println("Write yours favorites drinks, example: Vodka,Gin,Wine");
+                in = input.nextLine();
+                // Need to test this implement
+                String[] names = in.split(",");
+                for(String num : names){
+                    ((Client)objPerson).drinkLike.add(num);
+                }
             }
         }
         listA.add(objPerson);
@@ -75,6 +83,12 @@ class Admin extends Login implements Person {
 
         if (objDrinks.getName() == null) {
             System.out.println("What the name of product?");
+            in = input.nextLine();
+            objDrinks.setName(in);
+        }
+        // Check if is this it
+        if (objDrinks.getPriceDrink() <= 0) {
+            System.out.println("What the price of product?");
             in = input.nextLine();
             objDrinks.setName(in);
         }
@@ -171,7 +185,7 @@ class Admin extends Login implements Person {
             for (Drinks drinksA : listA) {
                 if(drinksA.getName().equals(name) && drinksA instanceof Drinks) {
                     while(true){
-                        System.out.println("Want to edit? \n Name(1) \n Brand(2) \n Expiration Date(3) \n Type of Drink(4) \n Exit(0)");
+                        System.out.println("Want to edit? \n Name(1) \n Brand(2) \n Expiration Date(3) \n Type of Drink(4) \n Price of Drink(5) \n Exit(0)");
                         newOp = input.nextInt();
                         input.nextLine();
                         if(newOp == 1){
@@ -196,6 +210,12 @@ class Admin extends Login implements Person {
                             newName = input.nextLine();
                             drinksA.setTypeDrink(newName);
                         }
+                        else if(newOp == 5){
+                            System.out.println("What the new Price of Drink?");
+                            Float newPrice = input.nextFloat();
+                            input.nextLine();
+                            drinksA.setPriceDrink(newPrice);
+                        }
                         else if(newOp == 0){
                             break;
                         }
@@ -205,9 +225,24 @@ class Admin extends Login implements Person {
             }
     }
 
-
-    public void editDrinks(ArrayList<Drinks> listA){
-
+    public void reportData(ArrayList<Drinks> drinks, ArrayList<Person> people){
+        System.out.println("\n------------------------");
+        System.out.println("\nAll drinks that we have:");
+        if(drinks.isEmpty()) System.out.println("Sorry, we will add later");
+        else{
+            for(Drinks drinksA : drinks){
+                drinksA.toString();
+            }
+        }
+        System.out.println("\nAll employees that we have:");
+        if(people.isEmpty()) System.out.println("Sorry, we will contract more people later");
+        else{
+            for(Person peopleA : people){
+                peopleA.toString();
+            }
+        }
+        System.out.println("\nEnd of Report, thank you");
+        System.out.println("\n------------------------");
     }
 
 }

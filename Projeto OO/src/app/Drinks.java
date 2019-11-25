@@ -3,19 +3,24 @@ package app;
 class Drinks {
     
     private String name;
+    private float priceDrink;
     private String brand;
     private String expirationDate;
     private String typeDrink;
+    private int rank;
+
 
     Drinks(){
-
+        this.rank = 0;
     }
 
-    Drinks(String name, String brand, String expirationDate, String typeDrink){
+    Drinks(String name, float priceDrink, String brand, String expirationDate, String typeDrink){
         this.name = name;
+        this.priceDrink = priceDrink;
         this.brand = brand;
         this.expirationDate = expirationDate;
         this.typeDrink = typeDrink;
+        this.rank = 0;
     }
 
     /**
@@ -47,10 +52,48 @@ class Drinks {
     }
 
     /**
+     * @return the priceDrink
+     */
+    public float getPriceDrink() {
+        return priceDrink;
+    }
+
+    /**
+     * @return the rank
+     */
+    public int getRank() {
+        return rank;
+    }
+
+    public String getPositionRank(){
+        if(getRank() <= 0) return "Iron";
+        else if(getRank() <= 2) return "Silver";
+        else if(getRank() <= 4) return "Gold";
+        else if(getRank() <= 6) return "Platinum";
+        else if(getRank() <= 8) return "Diamond";
+        else if(getRank() > 8) return "The Drink";
+        else return null;
+    }
+
+    /**
+     * @param rank the rank to set
+     */
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    /**
      * @param Name the name to set
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @param priceDrink the priceDrink to set
+     */
+    public void setPriceDrink(float priceDrink) {
+        this.priceDrink = priceDrink;
     }
 
     /**
@@ -74,11 +117,13 @@ class Drinks {
         this.typeDrink = typeDrink;
     }
 
-    @Override
+   
     public String toString() {
-        String auxString = "Name of Product: " + name + "\n" + "Brand: " + brand +
-        "\n" + "Expiration Date: " + expirationDate + "\n" + "Type of Drink: " + typeDrink;
+        String auxString = "Name of Product: " + name + "\n" + "Price of Product: " + 
+        priceDrink + "\n" + "Brand: " + brand + "\n" + "Expiration Date: " + 
+        expirationDate + "\n" + "Type of Drink: " + typeDrink;
         return auxString;
     }
+
 
 }
