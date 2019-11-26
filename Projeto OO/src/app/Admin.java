@@ -1,21 +1,30 @@
 package app;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 class Admin extends Login implements Person {
     private String name;
     private String CPF;
+    private String password;
 
     public Admin(String newName) {
         this.name = newName;
     }
 
+    @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -23,6 +32,7 @@ class Admin extends Login implements Person {
         this.name = name;
     }
 
+    @Override
     public String getCPF() {
         return CPF;
     }
@@ -32,24 +42,32 @@ class Admin extends Login implements Person {
         boolean checkCPF = ValidaCPF.isCPF(CPF);
         if (checkCPF) {
             this.CPF = CPF;
-            System.out.println("Sucesso, CPF set");
-        } else
-            System.out.printf("Erro, CPF invalido !!!\n");
+            System.out.println("Sucesso, CPF set for Admin");
+        } else{
+            System.out.printf("Erro, CPF invalido !!!\n Tente novamente\n CPF:\n");
+            Scanner input = new Scanner(System.in);
+            String cpf = input.nextLine();
+            setCPF(cpf);
+        }
     }
 
     @Override
     public void add(Person objPerson, ArrayList<Person> listA) {
 
-        // Use method setCPF to improve this point
-        System.out.println("CPF?\n Y or N");
         Scanner input = new Scanner(System.in);
+        
+        System.out.println("What's the name?");
         String in = input.nextLine();
+        objPerson.setName(in);
 
-        if (in.equalsIgnoreCase("Y")) {
-            System.out.println("Enter CPF: (only numbers)");
-            String CPF = input.nextLine();
-            objPerson.setCPF(CPF);
-        }
+        System.out.println("Enter CPF: (only numbers)");
+        String CPF = input.nextLine();
+        objPerson.setCPF(CPF);   
+
+        System.out.println("What's your password?");
+        in = input.nextLine();
+        objPerson.setPassword(in);
+
 
         if (objPerson instanceof Client) {
             ((Client)objPerson).setCashClient(100);
@@ -58,10 +76,14 @@ class Admin extends Login implements Person {
             if (in.equalsIgnoreCase("Y")) {
 
                 System.out.println("We have this options:");
-                for (Drinks num : drinks) {
-                    System.out.println(num.toString()); // Show names of drinks
-                }
+                
                 if(drinks.isEmpty()) System.out.println("Sorry, we don't have drinks yet");
+                else {
+                    for (Drinks num : drinks) {
+                        System.out.println(num.toString()); // Show drinks
+                    }
+                }
+
                 System.out.println("Write yours favorites drinks, example: Vodka,Gin,Wine");
                 in = input.nextLine();
                 // Need to test this implement
@@ -72,14 +94,13 @@ class Admin extends Login implements Person {
             }
         }
         listA.add(objPerson);
+        return;
 
     }
-
-    public void add(Drinks objDrinks, ArrayList<Drinks> listA) throws ParseException {
+    
+    public void add(Drinks objDrinks, ArrayList<Drinks> listA) {
         Scanner input = new Scanner(System.in);
         String in;
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         if (objDrinks.getName() == null) {
             System.out.println("What the name of product?");
@@ -89,8 +110,7 @@ class Admin extends Login implements Person {
         // Check if is this it
         if (objDrinks.getPriceDrink() <= 0) {
             System.out.println("What the price of product?");
-            float price = input.nextFloat();
-            input.nextLine();
+            float price = ExceptionHandling.readfloat();
             objDrinks.setPriceDrink(price);
         }
 
@@ -102,21 +122,20 @@ class Admin extends Login implements Person {
 
         if (objDrinks.getExpirationDate() == null) {
             System.out.println("What the Expiration Date of product? Date Format: DD/MM/YYYY");
-            in = input.nextLine();
-            Date data = dateFormat.parse(in);
-            String str = dateFormat.format(data);
-            objDrinks.setExpirationDate(str);
+            in = ExceptionHandling.readDate();
+            objDrinks.setExpirationDate(in);
         }
         
         if(objDrinks.getTypeDrink() == null){
-            System.out.println("What the Type of Drink of product? list");
+            System.out.println("What the Type of Drink of product? \n list of type: \n Vodka, Beer, Whisky, Wine, Gin \n");
             in = input.nextLine();
             objDrinks.setTypeDrink(in);
         }
-
+        
         listA.add(objDrinks);
     }
 
+    @Override
     public String toString(){
         String print = "Name: " + this.name;
 
@@ -157,29 +176,33 @@ class Admin extends Login implements Person {
             for (Person personA : listA) {
                 if(personA.getName().equals(name) && personA instanceof Person) {
 
-                    System.out.println("Want to edit? \n name(1) \n CPF(2) \n Exit(0)");
+                    System.out.println("Want to edit? \n name(1) \n CPF(2) \n Password(3) \n Exit(0)");
                     newOp = input.nextInt();
                     input.nextLine();
-                    if(newOp == 1){
+                    if(newOp == 1) {
                         System.out.println("What the new name?");
                         newName = input.nextLine();
                         personA.setName(newName);
                     }
-                    else if(newOp == 2){
+                    else if(newOp == 2) {
                         System.out.println("What the new CPF?");
                         newName = input.nextLine();
                         personA.setCPF(newName);
+                    }
+                    else if(newOp == 3) {
+                        System.out.println("What the new Password?");
+                        newName = input.nextLine();
+                        personA.setPassword(newName);
                     }
                     break;
                 }       
             }
     }
 
-    public void editDrink(ArrayList<Drinks> listA) throws ParseException { 
+    public void editDrink(ArrayList<Drinks> listA) { 
         Scanner input = new Scanner(System.in);
         String newName;
         int newOp = 10;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         System.out.println("What the name of Drink?");
             String name = input.nextLine();
@@ -201,20 +224,17 @@ class Admin extends Login implements Person {
                         }
                         else if(newOp == 3){
                             System.out.println("What the new Expiration Date? Date Format: DD/MM/YYYY");
-                            newName = input.nextLine();
-                            Date data = dateFormat.parse(newName);
-                            String str = dateFormat.format(data);
-                            drinksA.setExpirationDate(str);
+                            newName = ExceptionHandling.readDate();
+                            drinksA.setExpirationDate(newName);
                         }
                         else if(newOp == 4){
-                            System.out.println("What the new Type of Drink?");
+                            System.out.println("What the new Type of Drink? \n list of type: \n Vodka, Beer, Whisky, Wine, Gin \n");
                             newName = input.nextLine();
                             drinksA.setTypeDrink(newName);
                         }
                         else if(newOp == 5){
                             System.out.println("What the new Price of Drink?");
-                            Float newPrice = input.nextFloat();
-                            input.nextLine();
+                            Float newPrice =  ExceptionHandling.readfloat();
                             drinksA.setPriceDrink(newPrice);
                         }
                         else if(newOp == 0){
@@ -228,18 +248,19 @@ class Admin extends Login implements Person {
 
     public void reportData(ArrayList<Drinks> drinks, ArrayList<Person> people){
         System.out.println("\n------------------------");
-        System.out.println("\nAll drinks that we have:");
+        System.out.println("\nAll drinks that we have:\n");
         if(drinks.isEmpty()) System.out.println("Sorry, we will add later");
         else{
             for(Drinks drinksA : drinks){
-                drinksA.toString();
+                System.out.println(drinksA.toString());
             }
         }
-        System.out.println("\nAll employees that we have:");
-        if(people.isEmpty()) System.out.println("Sorry, we will contract more people later");
-        else{
+        System.out.println("\n------------------------");
+        System.out.println("\nAll People Registered that we have:\n");
+        if(people.isEmpty()) System.out.println("Sorry, we will add more people later");
+        else {
             for(Person peopleA : people){
-                peopleA.toString();
+                System.out.println(peopleA.toString());
             }
         }
         System.out.println("\nEnd of Report, thank you");

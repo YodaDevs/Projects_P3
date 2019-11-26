@@ -1,76 +1,199 @@
 package app;
 
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
+        
+        Login user = new Login();
+        Scanner input = new Scanner(System.in);
+        int sign;
+        while(true) {
 
-        Login test = new Login();
-        Person ad = test.signIn();
+            System.out.println("(1) - Sign in");
+            System.out.println("(0) - Exit");
+            sign = input.nextInt();
+            input.nextLine();
+            if(sign == 0) break;
 
-        if( ad instanceof Admin) {
+            if(sign == 1){
+                Person uPerson = user.signIn();
+                int op;
 
-            Admin admin = (Admin) ad;
+                while(true){
 
-            admin.setName("Marc");
-            admin.setCPF("09068183460");
-            
-            /*Client nameC = new Client("John");
-            Barman nameB = new Barman("Pedro");
-            SecurityGuard nameG = new SecurityGuard("Severino");
-            admin.add(nameC,test.list);
-            nameC = new Client("Maria");
-            admin.add(nameC,test.list);
-            nameC = new Client("Karl");
-            admin.add(nameC,test.list);
-            admin.add(nameB, test.list);
-            admin.add(nameG, test.list);*/
-            Drinks nameD = new Drinks();
-            printArray(test.list);
+                    if( uPerson instanceof Admin) {
 
-            admin.remove("Maria", test.list);
-            System.out.println("");
+                        System.out.println("What do you want to do?");
+                        System.out.println("(1) - Add People"); 
+                        System.out.println("(2) - Add Drinks");  
+                        System.out.println("(3) - Edit People");	
+                        System.out.println("(4) - Edit Drinks");
+                        System.out.println("(5) - Remove People");
+                        System.out.println("(6) - Remove Drinks");
+                        System.out.println("(7) - Show Report"); 
+                        System.out.println("(0) - Sign out");	
 
-            printArray(test.list);
+                        op = input.nextInt();
+                        input.nextLine();
 
-            /*admin.editPerson(test.list);
-            
-            printArray(test.list);*/
+                        Admin admin = (Admin) uPerson;
 
-            admin.add(nameD, test.drinks);
+                        if(op == 0) break;
 
-            printArrayDrinks(test.drinks);
+                        switch(op){
+                            case 1:
+                                System.out.println("What type of People?\n Options: admin,client,barman,security\n Write one:"); 
+                                String type = input.nextLine();
+                                if(type.equalsIgnoreCase("admin")){
+                                    Admin nameA = new Admin(null);
+                                    admin.add(nameA, user.getList());
+                                }
+                                else if(type.equalsIgnoreCase("client")){
+                                    Client nameB = new Client(null);
+                                    admin.add(nameB, user.getList());
+                                }
+                                else if(type.equalsIgnoreCase("barman")){
+                                    Barman nameC = new Barman(null);
+                                    admin.add(nameC, user.getList());
+                                }
+                                else if(type.equalsIgnoreCase("security")){
+                                    SecurityGuard nameD = new SecurityGuard(null);
+                                    admin.add(nameD, user.getList());
+                                }
+                                break;
 
+                            case 2:
+                                Drinks newDrink = new Drinks();
+                                admin.add(newDrink, user.drinks);
+                                break;
+                            
+                            case 3:
+                                admin.editPerson(user.getList());
+                                break;
 
-        } else if (ad instanceof Barman) {
+                            case 4:
+                                admin.editDrink(user.drinks);
+                                break;
 
-            Barman barman = (Barman) ad;
+                            case 5:
+                                System.out.println("What the name of person?");
+                                String person = input.nextLine();
+                                admin.remove(person, user.getList());
+                                break;
 
-        } else if (ad instanceof Client) {
+                            case 6:
+                                System.out.println("What the name of drink?");
+                                String drink = input.nextLine();
+                                admin.removeDrink(drink, user.drinks);
+                                break;
 
-            Client client = (Client) ad;
+                            case 7:
+                                admin.reportData(user.drinks, user.getList());
+                                break;
 
-        } else if (ad instanceof SecurityGuard) {
+                            case 0:
+                                break;
+                            default:
+                                System.out.println("\n Incorrect input\n");
+                                break;
+                        }
 
-            SecurityGuard securityGuard = (SecurityGuard) ad;
-            
-        }
+                    } else if (uPerson instanceof Barman) {
 
-    }
+                        Barman barman = (Barman) uPerson;
 
-    public static void printArray(ArrayList<Person> list) {
-        if(!list.isEmpty()){
-            for(int i = 0; i < list.size(); i++) {   
-                System.out.print(list.get(i).toString());
+                        System.out.println("What do you want to do?");
+                        System.out.println("(1) - Show my info");  
+                        System.out.println("(0) - Sign out");	
+
+                        op = input.nextInt();
+                        input.nextLine();
+
+                        if(op == 0) break;
+
+                        switch(op){
+                            case 1:
+                                barman.toString();
+                                break;
+
+                            case 0:
+                                break;
+                            
+                            default:
+                                System.out.println("\n Incorrect input\n");
+                                break;
+
+                        }
+
+                    } else if (uPerson instanceof Client) {
+
+                        Client client = (Client) uPerson;
+
+                        System.out.println("What do you want to do?");
+                        System.out.println("(1) - Pay Drink"); 
+                        System.out.println("(2) - Rank of Drinks"); 
+                        System.out.println("(3) - Deposit Cash"); 
+                        System.out.println("(0) - Sign out");	
+
+                        op = input.nextInt();
+                        input.nextLine();
+
+                        if(op == 0) break;
+
+                        switch(op){
+                            case 1:
+                                System.out.println("What drink you want to pay?");
+                                String drinkPay = input.nextLine();
+                                client.payBar(user.drinks, drinkPay);
+                                break;
+                            
+                            case 2:
+                                client.getRankingDrink(user.drinks);
+                                break;
+                            case 3:
+                                System.out.println("How much?");
+                                Float cash = ExceptionHandling.readfloat();
+                                client.depositCash(cash);
+
+                            case 0:
+                                break;
+                            
+                            default:
+                                System.out.println("\n Incorrect input\n");
+                                break;
+
+                        }
+
+                    } else if (uPerson instanceof SecurityGuard) {
+
+                        SecurityGuard securityGuard = (SecurityGuard) uPerson;  
+
+                        System.out.println("What do you want to do?");
+                        System.out.println("(1) - Show my info"); 
+                        System.out.println("(0) - Sign out");	
+
+                        op = input.nextInt();
+                        input.nextLine();
+
+                        if(op == 0) break;
+
+                        switch(op){
+                            case 1:
+                                securityGuard.toString();
+                                break;
+
+                            case 0:
+                                break;
+                            
+                            default:
+                                System.out.println("\n Incorrect input\n");
+                                break;
+                        }
+                    }
+                }
             }
         }
-    }
-
-    public static void printArrayDrinks(ArrayList<Drinks> list) {
-        if(!list.isEmpty()){
-            for(int i = 0; i < list.size(); i++) {   
-                System.out.print(list.get(i).toString());
-            }
-        }
+        input.close();
     }
 }
