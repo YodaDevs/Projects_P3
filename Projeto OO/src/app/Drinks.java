@@ -12,6 +12,7 @@ class Drinks {
 
     Drinks(){
         this.rank = 0;
+        this.priceDrink = -1;
     }
 
     Drinks(String name, float priceDrink, String brand, String expirationDate, String typeDrink){

@@ -89,8 +89,9 @@ class Admin extends Login implements Person {
         // Check if is this it
         if (objDrinks.getPriceDrink() <= 0) {
             System.out.println("What the price of product?");
-            in = input.nextLine();
-            objDrinks.setName(in);
+            float price = input.nextFloat();
+            input.nextLine();
+            objDrinks.setPriceDrink(price);
         }
 
         if (objDrinks.getBrand() == null) {

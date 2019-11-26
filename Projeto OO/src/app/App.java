@@ -42,14 +42,18 @@ public class App {
             printArrayDrinks(test.drinks);
 
 
-        } else if (ad instanceof Employee) {
+        } else if (ad instanceof Barman) {
 
-            Employee employee = (Employee) ad;
+            Barman barman = (Barman) ad;
 
         } else if (ad instanceof Client) {
 
             Client client = (Client) ad;
 
+        } else if (ad instanceof SecurityGuard) {
+
+            SecurityGuard securityGuard = (SecurityGuard) ad;
+            
         }
 
     }

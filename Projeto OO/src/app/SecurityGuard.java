@@ -48,10 +48,6 @@ class SecurityGuard extends Login implements Person{
         System.out.println("Sorry, but you can't do that!!!");
     }
 
-    public void edit(){
-
-    }
-
     public String toString(){
         String print = "Name: " + this.name;
 
