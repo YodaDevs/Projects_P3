@@ -10,10 +10,16 @@ class Login {
     private ArrayList<Person> list = new ArrayList<Person>();                                                      
     public ArrayList<Drinks> drinks = new ArrayList<Drinks>();
 
+    /**
+     * @return the List
+     */
     public ArrayList<Person> getList() {
         return list;
     }
 
+    /** 
+     * @return  the Person, because depending on the person, you will have your permission level
+     */
     public Person signIn(){
         Scanner input = new Scanner(System.in);
         System.out.println("CPF:");
@@ -33,6 +39,9 @@ class Login {
         return null;
     }
 
+    /** 
+     * @return  the Person, because need to check if this person is at our list
+     */
     public Person getUserFromTheList(String cpf, String password){
         for(Person person : list){
             if(person.getCPF().equals(cpf) && person.getPassword().equals(password)){
@@ -42,19 +51,29 @@ class Login {
         return null;
     }
 
+    /** 
+     * @param list      List of people
+     * @return          Void, because we just need to show all information about person
+     */
     public void printArray(ArrayList<Person> list) {
         if(!list.isEmpty()){
             for(int i = 0; i < list.size(); i++) {   
                 System.out.print(list.get(i).toString());
             }
         }
+        System.out.println();
     }
 
+    /** 
+     * @param list      List of drinks
+     * @return          Void, because we just need to show all information about drinks
+     */
     public void printArrayDrinks(ArrayList<Drinks> list) {
         if(!list.isEmpty()){
             for(int i = 0; i < list.size(); i++) {   
                 System.out.print(list.get(i).toString());
             }
+            System.out.println();
         }
     }
 }

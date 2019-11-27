@@ -10,13 +10,15 @@ public class App {
         Scanner input = new Scanner(System.in);
 
         int sign;
+        // Use this class to generate fake data, for test this software
+        fakeD.generateData(user);
 
         while(true) {
 
             System.out.println("(1) - Sign in");
             System.out.println("(0) - Exit");
-            fakeD.generateData(user);
             
+            // in this point do exception handling when reading an integer
             sign = ExceptionHandling.readInt();
 
             if(sign == 0) break;
@@ -29,6 +31,10 @@ public class App {
                 int op;
 
                 while(true){
+                    if(uPerson == null) {
+                        System.out.println("Sorry, but it's incorrect CPF or Password, try again");
+                        break;
+                    }
 
                     if( uPerson instanceof Admin) {
 
@@ -50,7 +56,7 @@ public class App {
 
                         switch(op){
                             case 1:
-                                System.out.println("What type of People?\n Options: admin,client,barman,security\n Write one:"); 
+                                System.out.println("What type of People?\nOptions: admin,client,barman,security\nWrite one:"); 
                                 String type = input.nextLine();
                                 if(type.equalsIgnoreCase("admin")){
                                     Admin nameA = new Admin(null);
@@ -112,6 +118,7 @@ public class App {
 
                         System.out.println("What do you want to do?");
                         System.out.println("(1) - Show my info");  
+                        System.out.println("(2) - Drinks info"); 
                         System.out.println("(0) - Sign out");	
 
                         op = ExceptionHandling.readInt();
@@ -120,9 +127,11 @@ public class App {
 
                         switch(op){
                             case 1:
-                                barman.toString();
+                                System.out.println(barman.toString()); 
                                 break;
-
+                            case 2:
+                                barman.printArrayDrinks(user.drinks);
+                                break;
                             case 0:
                                 break;
                             
@@ -139,7 +148,9 @@ public class App {
                         System.out.println("What do you want to do?");
                         System.out.println("(1) - Pay Drink"); 
                         System.out.println("(2) - Rank of Drinks"); 
-                        System.out.println("(3) - Deposit Cash"); 
+                        System.out.println("(3) - Deposit Cash");
+                        System.out.println("(4) - Show my info");
+                        System.out.println("(5) - Drinks info"); 
                         System.out.println("(0) - Sign out");	
 
                         op = ExceptionHandling.readInt();
@@ -160,6 +171,14 @@ public class App {
                                 System.out.println("How much?");
                                 Float cash = ExceptionHandling.readfloat();
                                 client.depositCash(cash);
+                                break;
+                            case 4:
+                                System.out.println(client.toString());
+                                break;
+
+                            case 5:
+                                client.printArrayDrinks(user.drinks);
+                                break;
 
                             case 0:
                                 break;
@@ -176,6 +195,7 @@ public class App {
 
                         System.out.println("What do you want to do?");
                         System.out.println("(1) - Show my info"); 
+                        System.out.println("(2) - Drinks info"); 
                         System.out.println("(0) - Sign out");	
 
                         op = ExceptionHandling.readInt();
@@ -184,7 +204,11 @@ public class App {
 
                         switch(op){
                             case 1:
-                                securityGuard.toString();
+                                System.out.println(securityGuard.toString());
+                                break;
+                            
+                            case 2:
+                                securityGuard.printArrayDrinks(user.drinks);
                                 break;
 
                             case 0:

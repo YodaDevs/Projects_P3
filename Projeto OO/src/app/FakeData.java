@@ -59,6 +59,11 @@ public class FakeData {
         client.setCPF("67729825090");
         client.setCashClient(100);
         client.setPassword("123");
+        String drinkLike = "Heineken Chopp,Duff Beer" ;
+        String[] names = drinkLike.split(",");
+        for(String num : names){
+            client.drinkLike.add(num);
+        }
 
         user.getList().add(client);
 
@@ -68,6 +73,12 @@ public class FakeData {
         client1.setCashClient(100);
         client1.setPassword("123");
 
+        drinkLike = "Duff Beer" ;
+        names = drinkLike.split(",");
+        for(String num : names){
+            client1.drinkLike.add(num);
+        }
+
         user.getList().add(client1);
 
         Client client2 = new Client(null);
@@ -75,6 +86,12 @@ public class FakeData {
         client2.setCPF("46726227035");
         client2.setCashClient(100);
         client2.setPassword("123");
+
+        drinkLike = "Absolut Vodka, Absolut Vodka Mango" ;
+        names = drinkLike.split(",");
+        for(String num : names){
+            client2.drinkLike.add(num);
+        }
 
         user.getList().add(client2);
         

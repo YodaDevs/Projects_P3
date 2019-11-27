@@ -66,6 +66,9 @@ class Drinks {
         return rank;
     }
 
+    /** 
+     * @return Rank position by the form of names designated by their rank number (About drink)
+     */
     public String getPositionRank(){
         if(getRank() <= 0) return "Iron";
         else if(getRank() <= 2) return "Silver";
@@ -118,11 +121,13 @@ class Drinks {
         this.typeDrink = typeDrink;
     }
 
-   
+    /** 
+     * @return The string with information about drink
+     */
     public String toString() {
-        String auxString = "Name of Product: " + name + "\n" + "Rank: " + getPositionRank() + "\n" + "Price of Product: R$" + 
+        String auxString = "\nName of Product: " + name + "\n" + "Rank: " + getPositionRank() + "\n" + "Price of Product: R$" + 
         priceDrink + "\n" + "Brand: " + brand + "\n" + "Expiration Date: " + 
-        expirationDate + "\n" + "Type of Drink: " + typeDrink + "\n";
+        expirationDate + "\n" + "Type of Drink: " + typeDrink + "\n\n";
         return auxString;
     }
 

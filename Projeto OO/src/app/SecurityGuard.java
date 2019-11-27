@@ -19,11 +19,17 @@ class SecurityGuard extends Login implements Person{
         this.name = name;
     }
 
+    /**
+     * @param name the name to set
+     */
     @Override
     public void setName(String name){
         this.name = name;
     }
 
+    /**
+     * @param CPF the cpf to set
+     */
     @Override
     public void setCPF(String CPF){
         boolean checkCPF = ValidaCPF.isCPF(CPF);
@@ -38,36 +44,61 @@ class SecurityGuard extends Login implements Person{
         }
     }
 
+    /**
+     * @param password the password to set
+     */
     @Override
     public void setPassword(String password) {
         this.password = password;
     }
 
+     /**
+     * @return the password
+     */
     @Override
     public String getPassword() {
         return password;
     }
 
+     /**
+     * @return the name
+     */
     @Override
     public String getName() {
         return this.name;
     }
 
+     /**
+     * @return the cpf
+     */
     @Override
     public String getCPF(){
         return this.CPF;
     }
 
+    /** 
+     * @param name      Name of person
+     * @param list      List of people
+     * @return          Void, because Security Guard doesn't have permission to add people in this software
+     */
     @Override
     public void add(Person name,ArrayList<Person> list){
         System.out.println("Sorry, but you can't do that!!!");
     }
 
+    /** 
+     * @param name      Name of person
+     * @param list      List of people
+     * @return          Void, because Security Guard doesn't have permission to remove people in this software
+     */
     @Override
     public void remove(String person, ArrayList<Person> listA){
         System.out.println("Sorry, but you can't do that!!!");
     }
 
+    /** 
+     * @return    The string with information about Security Guard
+     */
     @Override
     public String toString(){
         String print = "Name: " + this.name;
