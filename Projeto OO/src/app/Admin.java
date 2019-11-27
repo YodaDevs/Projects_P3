@@ -12,31 +12,49 @@ class Admin extends Login implements Person {
         this.name = newName;
     }
 
+    /**
+     * @return the name
+     */
     @Override
     public String getName() {
         return this.name;
     }
 
+    /**
+     * @return the password
+     */
     @Override
     public String getPassword() {
         return password;
     }
 
+    /**
+     * @param password the password to set
+     */
     @Override
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * @param name the name to set
+     */
     @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return the cpf
+     */
     @Override
     public String getCPF() {
         return CPF;
     }
 
+    /**
+     * @param CPF the cpf to set
+     */
     @Override
     public void setCPF(String CPF) {
         boolean checkCPF = ValidaCPF.isCPF(CPF);
@@ -166,6 +184,11 @@ class Admin extends Login implements Person {
         System.out.println("Sorry, incorrect name, please try again");   
     }
 
+    /** 
+     * @param Drink       Drink of type String is the name of drink that you want to remove
+     * @param listA       this is the list that you want to use to remove drink
+     * @return            Void, because we just need to remove from the list
+     */
     public void removeDrink(String drink, ArrayList<Drinks> listA) {
         for (Drinks drinksA : listA) {            
             if(drinksA.getName().equals(drink)) {                
