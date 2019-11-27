@@ -29,7 +29,6 @@ class SecurityGuard extends Login implements Person{
         boolean checkCPF = ValidaCPF.isCPF(CPF);
         if(checkCPF) {
             this.CPF = CPF;
-            System.out.println("Sucesso, CPF set");
         }
         else {
             System.out.printf("Erro, CPF invalido !!!\n Tente novamente\n CPF:\n");

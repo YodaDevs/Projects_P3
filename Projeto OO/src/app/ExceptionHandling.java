@@ -41,7 +41,24 @@ public class ExceptionHandling {
 				input.nextLine();
 			}
 		}     
-    }
+	}
+	
+	public static int readInt() {
+		input = new Scanner(System.in);
+		
+		while (true) {
+			try {
+				int value = input.nextInt();
+				return value;
+				
+			} catch (InputMismatchException e) {
+				System.out.println("Error: Invalid input. Try another number.");
+			} finally {
+				input.nextLine();
+			}
+		}
+		
+	}
     
 
 

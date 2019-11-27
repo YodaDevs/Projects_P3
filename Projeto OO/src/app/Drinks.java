@@ -122,7 +122,7 @@ class Drinks {
     public String toString() {
         String auxString = "Name of Product: " + name + "\n" + "Rank: " + getPositionRank() + "\n" + "Price of Product: R$" + 
         priceDrink + "\n" + "Brand: " + brand + "\n" + "Expiration Date: " + 
-        expirationDate + "\n" + "Type of Drink: " + typeDrink;
+        expirationDate + "\n" + "Type of Drink: " + typeDrink + "\n";
         return auxString;
     }
 

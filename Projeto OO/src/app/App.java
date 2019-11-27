@@ -6,17 +6,25 @@ public class App {
     public static void main(String[] args) throws Exception {
         
         Login user = new Login();
+        FakeData fakeD = new FakeData();
         Scanner input = new Scanner(System.in);
+
         int sign;
+
         while(true) {
 
             System.out.println("(1) - Sign in");
             System.out.println("(0) - Exit");
-            sign = input.nextInt();
-            input.nextLine();
+            fakeD.generateData(user);
+            
+            sign = ExceptionHandling.readInt();
+
             if(sign == 0) break;
 
             if(sign == 1){
+
+                
+
                 Person uPerson = user.signIn();
                 int op;
 
@@ -34,8 +42,7 @@ public class App {
                         System.out.println("(7) - Show Report"); 
                         System.out.println("(0) - Sign out");	
 
-                        op = input.nextInt();
-                        input.nextLine();
+                        op = ExceptionHandling.readInt();
 
                         Admin admin = (Admin) uPerson;
 
@@ -107,8 +114,7 @@ public class App {
                         System.out.println("(1) - Show my info");  
                         System.out.println("(0) - Sign out");	
 
-                        op = input.nextInt();
-                        input.nextLine();
+                        op = ExceptionHandling.readInt();
 
                         if(op == 0) break;
 
@@ -136,8 +142,7 @@ public class App {
                         System.out.println("(3) - Deposit Cash"); 
                         System.out.println("(0) - Sign out");	
 
-                        op = input.nextInt();
-                        input.nextLine();
+                        op = ExceptionHandling.readInt();
 
                         if(op == 0) break;
 
@@ -173,8 +178,7 @@ public class App {
                         System.out.println("(1) - Show my info"); 
                         System.out.println("(0) - Sign out");	
 
-                        op = input.nextInt();
-                        input.nextLine();
+                        op = ExceptionHandling.readInt();
 
                         if(op == 0) break;
 

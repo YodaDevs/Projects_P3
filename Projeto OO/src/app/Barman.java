@@ -39,7 +39,6 @@ class Barman extends Login implements Person {
         boolean checkCPF = ValidaCPF.isCPF(CPF);
         if(checkCPF) {
             this.CPF = CPF;
-            System.out.println("Sucesso, CPF set for Barman");
         }
         else {
             System.out.printf("Erro, CPF invalido !!!\n Tente novamente\n CPF:\n");
@@ -68,7 +67,7 @@ class Barman extends Login implements Person {
     public void remove(String person, ArrayList<Person> listA){
         System.out.println("Sorry, but you can't do that!!!");
     }
-    
+
     @Override
     public String toString(){
         String print = "Name: " + this.name;

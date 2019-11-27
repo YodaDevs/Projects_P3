@@ -22,7 +22,6 @@ class Client extends Login implements Person {
         boolean checkCPF = ValidaCPF.isCPF(CPF);
         if(checkCPF) {
             this.CPF = CPF;
-            System.out.println("Sucesso, CPF set for Client");
             return;
         }
         else {
@@ -73,9 +72,14 @@ class Client extends Login implements Person {
 
     public void payBar(ArrayList<Drinks> drinks, String myDrink){
         for (Drinks drinksA : drinks) {            
-            if(drinksA.getName().equals(myDrink)) {                
-                setCashClient(getCashClient() - drinksA.getPriceDrink());
-                System.out.println("\nYour new cash is: " + getCashClient() + "\n Because "+ myDrink + "cost: " + drinksA.getPriceDrink());
+            if(drinksA.getName().equals(myDrink)) {   
+                float cash = getCashClient() - drinksA.getPriceDrink();
+                if(cash < 0) {
+                    System.out.println("Sorry, but you can't pay this drink, please deposit more to buy this drink");
+                    return;
+                }              
+                setCashClient(cash);
+                System.out.println("\nYour new cash is: R$" + getCashClient() + "\nBecause "+ myDrink + "cost: R$" + drinksA.getPriceDrink() + "\n");
                 
                 drinksA.setRank(drinksA.getRank() + 1);
                 return;
@@ -100,9 +104,10 @@ class Client extends Login implements Person {
             System.out.println("\nName of Product: " + drinksA.getName() + "\n" + 
             "Rank: " + drinksA.getPositionRank() + "\n" + "Type of Drink: " + 
             drinksA.getTypeDrink());
-        } 
+        }
+        System.out.println(); 
     }
-    
+
     @Override
     public String toString(){
         String print = "Name: " + this.name + " // CPF: " + this.CPF;

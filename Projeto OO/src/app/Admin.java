@@ -42,7 +42,6 @@ class Admin extends Login implements Person {
         boolean checkCPF = ValidaCPF.isCPF(CPF);
         if (checkCPF) {
             this.CPF = CPF;
-            System.out.println("Sucesso, CPF set for Admin");
         } else{
             System.out.printf("Erro, CPF invalido !!!\n Tente novamente\n CPF:\n");
             Scanner input = new Scanner(System.in);
@@ -62,7 +61,8 @@ class Admin extends Login implements Person {
 
         System.out.println("Enter CPF: (only numbers)");
         String CPF = input.nextLine();
-        objPerson.setCPF(CPF);   
+        objPerson.setCPF(CPF); 
+        System.out.println("Sucess, CPF set");  
 
         System.out.println("What's your password?");
         in = input.nextLine();
@@ -86,7 +86,6 @@ class Admin extends Login implements Person {
 
                 System.out.println("Write yours favorites drinks, example: Vodka,Gin,Wine");
                 in = input.nextLine();
-                // Need to test this implement
                 String[] names = in.split(",");
                 for(String num : names){
                     ((Client)objPerson).drinkLike.add(num);
@@ -127,7 +126,7 @@ class Admin extends Login implements Person {
         }
         
         if(objDrinks.getTypeDrink() == null){
-            System.out.println("What the Type of Drink of product? \n list of type: \n Vodka, Beer, Whisky, Wine, Gin \n");
+            System.out.println("What the Type of Drink of product?\nlist of type:\nVodka, Beer, Whisky, Wine, Gin");
             in = input.nextLine();
             objDrinks.setTypeDrink(in);
         }
@@ -188,6 +187,7 @@ class Admin extends Login implements Person {
                         System.out.println("What the new CPF?");
                         newName = input.nextLine();
                         personA.setCPF(newName);
+                        System.out.println("Sucess, CPF set");
                     }
                     else if(newOp == 3) {
                         System.out.println("What the new Password?");
@@ -210,7 +210,7 @@ class Admin extends Login implements Person {
                 if(drinksA.getName().equals(name) && drinksA instanceof Drinks) {
                     while(true){
                         System.out.println("Want to edit? \n Name(1) \n Brand(2) \n Expiration Date(3) \n Type of Drink(4) \n Price of Drink(5) \n Exit(0)");
-                        newOp = input.nextInt();
+                        newOp = ExceptionHandling.readInt();
                         input.nextLine();
                         if(newOp == 1){
                             System.out.println("What the new Name?");
@@ -228,7 +228,7 @@ class Admin extends Login implements Person {
                             drinksA.setExpirationDate(newName);
                         }
                         else if(newOp == 4){
-                            System.out.println("What the new Type of Drink? \n list of type: \n Vodka, Beer, Whisky, Wine, Gin \n");
+                            System.out.println("What the new Type of Drink?\nlist of type:\nVodka, Beer, Whisky, Wine, Gin");
                             newName = input.nextLine();
                             drinksA.setTypeDrink(newName);
                         }

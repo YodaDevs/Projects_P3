@@ -7,8 +7,7 @@ class Login {
     private String adminLogin = "123";
     private String passwordAdmin = "123";
 
-    private ArrayList<Person> list = new ArrayList<Person>(); // Need to know when login how many persons in this system
-                                                      // Check if InstanceOf solution the problem about type of class in array
+    private ArrayList<Person> list = new ArrayList<Person>();                                                      
     public ArrayList<Drinks> drinks = new ArrayList<Drinks>();
 
     public ArrayList<Person> getList() {
