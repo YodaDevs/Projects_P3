@@ -15,15 +15,23 @@ public class ExceptionHandling {
 		
 		while (true) {
 			try {
+
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
                 String in = input.nextLine();
                 Date data = dateFormat.parse(in);
+
                 String str = dateFormat.format(data);
+
 				return str;
 				
 			} catch (ParseException e) {
-				System.out.println("Error: Invalid input. Enter an date with this format: dd/MM/yyyy.");
-			} 
+                
+                System.out.println("Error: Invalid input. Enter an date with this format: dd/MM/yyyy, check the numbers");
+                System.out.println("What the Expiration Date of product? Date Format: DD/MM/YYYY");
+
+            }
+             
 		}     
     }
 

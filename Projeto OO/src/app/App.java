@@ -62,20 +62,28 @@ public class App {
                                 System.out.println("What type of People?\nOptions: admin,client,barman,security\nWrite one:"); 
                                 String type = input.nextLine();
                                 if(type.equalsIgnoreCase("admin")){
+
                                     Admin nameA = new Admin(null);
-                                    admin.add(nameA, user.getList());
+                                    uPerson.add(nameA, user.getList());
+
                                 }
                                 else if(type.equalsIgnoreCase("client")){
+
                                     Client nameB = new Client(null);
-                                    admin.add(nameB, user.getList());
+                                    uPerson.add(nameB, user.getList());
+
                                 }
                                 else if(type.equalsIgnoreCase("barman")){
+
                                     Barman nameC = new Barman(null);
-                                    admin.add(nameC, user.getList());
+                                    uPerson.add(nameC, user.getList());
+
                                 }
                                 else if(type.equalsIgnoreCase("security")){
+
                                     SecurityGuard nameD = new SecurityGuard(null);
-                                    admin.add(nameD, user.getList());
+                                    uPerson.add(nameD, user.getList());
+
                                 }
                                 break;
 
@@ -95,7 +103,7 @@ public class App {
                             case 5:
                                 System.out.println("What the name of person?");
                                 String person = input.nextLine();
-                                admin.remove(person, user.getList());
+                                uPerson.remove(person, user.getList());
                                 break;
 
                             case 6:
@@ -118,8 +126,6 @@ public class App {
 
                     } else if (uPerson instanceof Barman) {
 
-                        Barman barman = (Barman) uPerson;
-
                         System.out.println("What do you want to do?");
                         System.out.println("(1) - Show my info");  
                         System.out.println("(2) - Drinks info"); 
@@ -131,9 +137,10 @@ public class App {
 
                         switch(op){
                             case 1:
-                                System.out.println(barman.toString()); 
+                                System.out.println(uPerson.toString()); 
                                 break;
                             case 2:
+                                Barman barman = (Barman) uPerson;
                                 barman.printArrayDrinks(user.drinks);
                                 break;
                             case 0:

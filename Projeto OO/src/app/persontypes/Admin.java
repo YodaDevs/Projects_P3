@@ -90,19 +90,26 @@ public class Admin extends Login implements Person {
 
 
         if (objPerson instanceof Client) {
+           
             ((Client)objPerson).setCashClient(100);
             System.out.println("Do you have favorite drinks? Y or N");
             String in = input.nextLine();
+
             if (in.equalsIgnoreCase("Y")) {
+                
                 System.out.println("Write yours favorites drinks, options type: Vodka,Gin,Wine,Beer,Whisky");
                 System.out.println("Please use this format, example: Heineken,Pietra,Stella Artois");
                 in = input.nextLine();
+
                 String[] names = in.split(",");
+
                 for(String num : names){
                     ((Client)objPerson).drinkLike.add(num);
                 }
+
             }
         }
+        
         listA.add(objPerson);
         return;
 

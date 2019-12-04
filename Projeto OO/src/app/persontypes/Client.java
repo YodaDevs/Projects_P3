@@ -172,7 +172,7 @@ public class Client extends Login implements Person {
             }
             print+= "\n";
         }
-        else print += "about this client: " + name + " we don't have infomation about favorite drinks\n";
+        else print += "about this client: " + name + " doesn't have infomation about favorite drinks\n";
         return print;
     }
 
