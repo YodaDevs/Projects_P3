@@ -1,6 +1,6 @@
 package app;
 
-class Drinks {
+public class Drinks {
     
     private String name;
     private float priceDrink;

@@ -1,26 +1,28 @@
-package app;
+package app.persontypes;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Barman extends Login implements Person { 
+import app.*;
 
+public class SecurityGuard extends Login implements Person{
+    
     private String name;
     private String CPF;
     private String password;
 
     
-    Barman(String name, String CPF){
+    SecurityGuard(String name, String CPF){
         this.name = name;
-        setCPF(CPF);
+        this.CPF = CPF;
     }
-
-    Barman(String name){
+    
+    public SecurityGuard(String name){
         this.name = name;
     }
 
     /**
-     * @param Name the name to set
+     * @param name the name to set
      */
     @Override
     public void setName(String name){
@@ -28,11 +30,20 @@ class Barman extends Login implements Person {
     }
 
     /**
-    * @return the name
-    */
+     * @param CPF the cpf to set
+     */
     @Override
-    public String getName() {
-        return this.name;
+    public void setCPF(String CPF){
+        boolean checkCPF = ExceptionHandling.isCPF(CPF);
+        if(checkCPF) {
+            this.CPF = CPF;
+        }
+        else {
+            System.out.printf("Error !!!\n Try again\n CPF:\n");
+            Scanner input = new Scanner(System.in);
+            String cpf = input.nextLine();
+            setCPF(cpf);
+        }
     }
 
     /**
@@ -43,31 +54,6 @@ class Barman extends Login implements Person {
         this.password = password;
     }
 
-    /**
-     * @param CPF the cpf to set
-     */
-    @Override
-    public void setCPF(String CPF){
-        boolean checkCPF = ValidaCPF.isCPF(CPF);
-        if(checkCPF) {
-            this.CPF = CPF;
-        }
-        else {
-            System.out.printf("Erro, CPF invalido !!!\n Tente novamente\n CPF:\n");
-            Scanner input = new Scanner(System.in);
-            String cpf = input.nextLine();
-            setCPF(cpf);
-        }
-    }
-
-     /**
-     * @return the CPF
-     */
-    @Override
-    public String getCPF(){
-        return this.CPF;
-    }
-
      /**
      * @return the password
      */
@@ -76,10 +62,26 @@ class Barman extends Login implements Person {
         return password;
     }
 
-     /** 
+     /**
+     * @return the name
+     */
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+     /**
+     * @return the cpf
+     */
+    @Override
+    public String getCPF(){
+        return this.CPF;
+    }
+
+    /** 
      * @param name      Name of person
      * @param list      List of people
-     * @return          Void, because Barman doesn't have permission to add people in this software
+     * @return          Void, because Security Guard doesn't have permission to add people in this software
      */
     @Override
     public void add(Person name,ArrayList<Person> list){
@@ -89,7 +91,7 @@ class Barman extends Login implements Person {
     /** 
      * @param name      Name of person
      * @param list      List of people
-     * @return          Void, because Barman doesn't have permission to remove people in this software
+     * @return          Void, because Security Guard doesn't have permission to remove people in this software
      */
     @Override
     public void remove(String person, ArrayList<Person> listA){
@@ -97,16 +99,16 @@ class Barman extends Login implements Person {
     }
 
     /** 
-     * @return    The string with information about Barman
+     * @return    The string with information about Security Guard
      */
     @Override
     public String toString(){
         String print = "Name: " + this.name;
 
         if(this.CPF != null){
-            print = print + " // CPF: " + this.CPF;
+            print = print + " // CPF: " + imprimeCPF(this.CPF);
         }
-        print += " // Type: Barman" + "\n";
+        print += " // Type: SecurityGuard" + "\n";
         return print;
     }
 

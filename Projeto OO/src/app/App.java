@@ -1,6 +1,7 @@
 package app;
 
 import java.util.Scanner;
+import app.persontypes.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -52,6 +53,8 @@ public class App {
 
                         Admin admin = (Admin) uPerson;
 
+
+
                         if(op == 0) break;
 
                         switch(op){
@@ -97,8 +100,9 @@ public class App {
 
                             case 6:
                                 System.out.println("What the name of drink?");
-                                String drink = input.nextLine();
-                                admin.removeDrink(drink, user.drinks);
+                                Drinks drinkA = new Drinks();
+                                drinkA.setName(input.nextLine());
+                                admin.remove(drinkA, user.drinks);
                                 break;
 
                             case 7:

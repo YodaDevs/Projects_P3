@@ -2,8 +2,9 @@ package app;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import app.persontypes.*;
 
-class Login {
+public class Login {
     private String adminLogin = "123";
     private String passwordAdmin = "123";
 
@@ -52,19 +53,6 @@ class Login {
     }
 
     /** 
-     * @param list      List of people
-     * @return          Void, because we just need to show all information about person
-     */
-    public void printArray(ArrayList<Person> list) {
-        if(!list.isEmpty()){
-            for(int i = 0; i < list.size(); i++) {   
-                System.out.print(list.get(i).toString());
-            }
-        }
-        System.out.println();
-    }
-
-    /** 
      * @param list      List of drinks
      * @return          Void, because we just need to show all information about drinks
      */
@@ -75,5 +63,10 @@ class Login {
             }
             System.out.println();
         }
+    }
+
+    public static String imprimeCPF(String CPF) {
+        return(CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
+        CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
     }
 }

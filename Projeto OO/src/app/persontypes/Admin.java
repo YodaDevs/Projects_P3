@@ -1,9 +1,10 @@
-package app;
+package app.persontypes;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import app.*;
 
-class Admin extends Login implements Person {
+public class Admin extends Login implements Person {
     private String name;
     private String CPF;
     private String password;
@@ -57,11 +58,11 @@ class Admin extends Login implements Person {
      */
     @Override
     public void setCPF(String CPF) {
-        boolean checkCPF = ValidaCPF.isCPF(CPF);
+        boolean checkCPF = ExceptionHandling.isCPF(CPF);
         if (checkCPF) {
             this.CPF = CPF;
-        } else{
-            System.out.printf("Erro, CPF invalido !!!\n Tente novamente\n CPF:\n");
+        } else {
+            System.out.printf("Error !!!\n Try again\n CPF:\n");
             Scanner input = new Scanner(System.in);
             String cpf = input.nextLine();
             setCPF(cpf);
@@ -78,23 +79,20 @@ class Admin extends Login implements Person {
         Scanner input = new Scanner(System.in);
         
         System.out.println("What's the name?");
-        String in = input.nextLine();
-        objPerson.setName(in);
+        objPerson.setName(input.nextLine());
 
         System.out.println("Enter CPF: (only numbers)");
-        String CPF = input.nextLine();
-        objPerson.setCPF(CPF); 
+        objPerson.setCPF(input.nextLine()); 
         System.out.println("Sucess, CPF set");  
 
         System.out.println("What's your password?");
-        in = input.nextLine();
-        objPerson.setPassword(in);
+        objPerson.setPassword(input.nextLine());
 
 
         if (objPerson instanceof Client) {
             ((Client)objPerson).setCashClient(100);
             System.out.println("Do you have favorite drinks? Y or N");
-            in = input.nextLine();
+            String in = input.nextLine();
             if (in.equalsIgnoreCase("Y")) {
                 System.out.println("Write yours favorites drinks, options type: Vodka,Gin,Wine,Beer,Whisky");
                 System.out.println("Please use this format, example: Heineken,Pietra,Stella Artois");
@@ -121,33 +119,28 @@ class Admin extends Login implements Person {
 
         if (objDrinks.getName() == null) {
             System.out.println("What the name of product?");
-            in = input.nextLine();
-            objDrinks.setName(in);
+            objDrinks.setName(input.nextLine());
         }
         // Check if is this it
         if (objDrinks.getPriceDrink() <= 0) {
             System.out.println("What the price of product?");
             System.out.print("R$ ");
-            float price = ExceptionHandling.readfloat();
-            objDrinks.setPriceDrink(price);
+            objDrinks.setPriceDrink(ExceptionHandling.readfloat());
         }
 
         if (objDrinks.getBrand() == null) {
             System.out.println("What the brand of product?");
-            in = input.nextLine();
-            objDrinks.setBrand(in);
+            objDrinks.setBrand(input.nextLine());
         }
 
         if (objDrinks.getExpirationDate() == null) {
             System.out.println("What the Expiration Date of product? Date Format: DD/MM/YYYY");
-            in = ExceptionHandling.readDate();
-            objDrinks.setExpirationDate(in);
+            objDrinks.setExpirationDate(ExceptionHandling.readDate());
         }
         
         if(objDrinks.getTypeDrink() == null){
             System.out.println("What the Type of Drink of product?\nlist of type:\nVodka, Beer, Whisky, Wine, Gin");
-            in = input.nextLine();
-            objDrinks.setTypeDrink(in);
+            objDrinks.setTypeDrink(input.nextLine());
         }
         
         listA.add(objDrinks);
@@ -161,7 +154,7 @@ class Admin extends Login implements Person {
         String print = "Name: " + this.name;
 
         if(this.CPF != null){
-            print += " // CPF: " + this.CPF;
+            print += " // CPF: " + imprimeCPF(this.CPF);
         }
         print += " Type: Admin";
         return print;
@@ -178,7 +171,7 @@ class Admin extends Login implements Person {
             if(personA.getName().equals(person)) {                
                 listA.remove(personA);
                 System.out.println("\nRemoved from the list: " + person);
-                break;
+                return;
             }       
         }
         System.out.println("Sorry, incorrect name, please try again");   
@@ -189,12 +182,13 @@ class Admin extends Login implements Person {
      * @param listA       this is the list that you want to use to remove drink
      * @return            Void, because we just need to remove from the list
      */
-    public void removeDrink(String drink, ArrayList<Drinks> listA) {
+    public void remove(Drinks drinkA, ArrayList<Drinks> listA) {
+        String drink = drinkA.getName();
         for (Drinks drinksA : listA) {            
             if(drinksA.getName().equals(drink)) {                
                 listA.remove(drinksA);
                 System.out.println("\nRemoved from the list: " + drink + "\n");
-                break;
+                return;
             }       
         }   
         System.out.println("Sorry, incorrect name, please try again\n");   

@@ -1,9 +1,11 @@
-package app;
+package app.persontypes;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Client extends Login implements Person {
+import app.*;
+
+public class Client extends Login implements Person {
     
     private String name;
     private String CPF;
@@ -12,7 +14,7 @@ class Client extends Login implements Person {
 
     public ArrayList<String> drinkLike = new ArrayList<String>();
 
-    Client(String name){
+    public Client(String name){
         this.setName(name);
         this.cashClient = 0;
     }
@@ -22,13 +24,13 @@ class Client extends Login implements Person {
      */
     @Override
     public void setCPF(String CPF){
-        boolean checkCPF = ValidaCPF.isCPF(CPF);
+        boolean checkCPF = ExceptionHandling.isCPF(CPF);
         if(checkCPF) {
             this.CPF = CPF;
             return;
         }
         else {
-            System.out.printf("Erro, CPF invalido !!!\n Tente novamente\n CPF:\n");
+            System.out.printf("Error !!!\n Try again\n CPF:\n");
             Scanner input = new Scanner(System.in);
             String cpf = input.nextLine();
             setCPF(cpf);
@@ -161,7 +163,7 @@ class Client extends Login implements Person {
      */
     @Override
     public String toString(){
-        String print = "\nName: " + this.name + " // CPF: " + this.CPF;
+        String print = "\nName: " + this.name + " // CPF: " + imprimeCPF(this.CPF);
         print += " // Type: Client" + "\n";
         if(!drinkLike.isEmpty()){
             print+= "Drinks that " + name + " like:\n// ";

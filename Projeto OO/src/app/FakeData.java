@@ -1,5 +1,7 @@
 package app;
 
+import app.persontypes.*;
+
 public class FakeData {
 
     public void generateData(Login user){
@@ -7,7 +9,7 @@ public class FakeData {
         drink.setName("Absolut Vodka");
         drink.setBrand("Absolut");
         drink.setExpirationDate("20/01/2020");
-        drink.setPriceDrink(100);
+        drink.setPriceDrink(45);
         drink.setRank(8);
         drink.setTypeDrink("Vodka");
 
@@ -17,7 +19,7 @@ public class FakeData {
         drink1.setName("Absolut Vodka Mango");
         drink1.setBrand("Absolut");
         drink1.setExpirationDate("20/01/2020");
-        drink1.setPriceDrink(100);
+        drink1.setPriceDrink(55);
         drink1.setRank(2);
         drink1.setTypeDrink("Vodka");
 
@@ -37,7 +39,7 @@ public class FakeData {
         drink3.setName("Duff Beer");
         drink3.setBrand("The Simpsons");
         drink3.setExpirationDate("20/01/2020");
-        drink3.setPriceDrink(100);
+        drink3.setPriceDrink(12);
         drink3.setRank(10);
         drink3.setTypeDrink("Beer");
 
@@ -47,7 +49,7 @@ public class FakeData {
         drink4.setName("Heineken Chopp");
         drink4.setBrand("Heineken");
         drink4.setExpirationDate("20/01/2020");
-        drink4.setPriceDrink(100);
+        drink4.setPriceDrink(30);
         drink4.setRank(20);
         drink4.setTypeDrink("Beer");
 
