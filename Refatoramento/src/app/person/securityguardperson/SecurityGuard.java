@@ -1,48 +1,30 @@
-package app.persontypes;
-
-import java.util.ArrayList;
-import java.util.Scanner;
+package app.person.securityguardperson;
 
 import app.*;
+import app.person.*;
 
-public class Barman extends Login implements Person { 
-
+public class SecurityGuard extends Person {
+    
     private String name;
     private String CPF;
     private String password;
 
     
-    Barman(String name, String CPF){
+    SecurityGuard(String name, String CPF){
         this.name = name;
-        setCPF(CPF);
+        this.CPF = CPF;
     }
-
-    public Barman(String name){
+    
+    public SecurityGuard(String name){
         this.name = name;
     }
 
     /**
-     * @param Name the name to set
+     * @param name the name to set
      */
     @Override
     public void setName(String name){
         this.name = name;
-    }
-
-    /**
-    * @return the name
-    */
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * @param password the password to set
-     */
-    @Override
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     /**
@@ -56,18 +38,17 @@ public class Barman extends Login implements Person {
         }
         else {
             System.out.printf("Error !!!\n Try again\n CPF:\n");
-            Scanner input = new Scanner(System.in);
-            String cpf = input.nextLine();
+            String cpf = ExceptionHandling.readString();
             setCPF(cpf);
         }
     }
 
-     /**
-     * @return the CPF
+    /**
+     * @param password the password to set
      */
     @Override
-    public String getCPF(){
-        return this.CPF;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
      /**
@@ -78,28 +59,44 @@ public class Barman extends Login implements Person {
         return password;
     }
 
-     /** 
-     * @param name      Name of person
-     * @param list      List of people
-     * @return          Void, because Barman doesn't have permission to add people in this software
+     /**
+     * @return the name
      */
     @Override
-    public void add(Person name,ArrayList<Person> list){
+    public String getName() {
+        return this.name;
+    }
+
+     /**
+     * @return the cpf
+     */
+    @Override
+    public String getCPF(){
+        return this.CPF;
+    }
+
+    /** 
+     * @param name      Name of person
+     * @param list      List of people
+     * @return          Void, because Security Guard doesn't have permission to add people in this software
+     */
+    @Override
+    public void add(){
         System.out.println("Sorry, but you can't do that!!!");
     }
 
     /** 
      * @param name      Name of person
      * @param list      List of people
-     * @return          Void, because Barman doesn't have permission to remove people in this software
+     * @return          Void, because Security Guard doesn't have permission to remove people in this software
      */
     @Override
-    public void remove(String person, ArrayList<Person> listA){
+    public void remove(){
         System.out.println("Sorry, but you can't do that!!!");
     }
 
     /** 
-     * @return    The string with information about Barman
+     * @return    The string with information about Security Guard
      */
     @Override
     public String toString(){
@@ -108,7 +105,7 @@ public class Barman extends Login implements Person {
         if(this.CPF != null){
             print = print + " // CPF: " + imprimeCPF(this.CPF);
         }
-        print += " // Type: Barman" + "\n";
+        print += " // Type: SecurityGuard" + "\n";
         return print;
     }
 

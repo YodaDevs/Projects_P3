@@ -1,9 +1,12 @@
 package app.views.loginscreen;
 
 import app.ExceptionHandling;
-import app.Person;
+import app.person.*;
 import app.data.*;
-import app.persontypes.*;
+import app.person.adminperson.*;
+import app.person.clientperson.*;
+import app.person.barmanperson.*;
+import app.person.securityguardperson.*;
 
 public class LoginContext {
      
@@ -27,7 +30,7 @@ public class LoginContext {
             System.out.println("Sorry, but it's incorrect CPF or Password, try again");
             return false;
         }
-        if( user instanceof Admin) {
+        if( user instanceof AdminAbstract) {
             setLoginStrategy(new AdminConcreteStrategy(user));
         }
         else if( user instanceof Client){
@@ -46,8 +49,6 @@ public class LoginContext {
     }
 
     public void startHomeStrategy() {
-        
-        dataLists.fakeData();
         
         while(true){
 

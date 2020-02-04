@@ -14,11 +14,11 @@ public class OptionsB extends AdminScreen {
 
             switch(op){
                 case 3:
-                getAdmin().editPerson(dataList.getPersonList());
+                adminPerson.editPerson(dataList.getPersonList());
                 break;
 
                 case 4:
-                getAdmin().editDrink(dataList.getDrinksList());
+                adminDrinks.editDrink(dataList.getDrinksList());
                 break;
 
                 case 0:

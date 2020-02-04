@@ -1,11 +1,11 @@
-package app.persontypes;
+package app.person.clientperson;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import app.*;
+import app.person.*;
 
-public class Client extends Login implements Person {
+public class Client extends Person {
     
     private String name;
     private String CPF;
@@ -31,8 +31,7 @@ public class Client extends Login implements Person {
         }
         else {
             System.out.printf("Error !!!\n Try again\n CPF:\n");
-            Scanner input = new Scanner(System.in);
-            String cpf = input.nextLine();
+            String cpf = ExceptionHandling.readString();
             setCPF(cpf);
         }
     }
@@ -97,7 +96,7 @@ public class Client extends Login implements Person {
      * @return          Void, because client doesn't have permission to remove people in this software
      */
     @Override
-    public void remove(String person, ArrayList<Person> listA){ // Need to have a way to blocked a client for some services
+    public void remove(){ // Need to have a way to blocked a client for some services
         System.out.println("Sorry, but you can't do that!!!");
     }
 
@@ -140,7 +139,7 @@ public class Client extends Login implements Person {
      * @return          Void, because client doesn't have permission to add people in this software
      */
     @Override
-    public void add(Person name,ArrayList<Person> list) {
+    public void add() {
         System.out.println("Sorry, but you can't do that!!!");
 
     }
@@ -163,7 +162,7 @@ public class Client extends Login implements Person {
      */
     @Override
     public String toString(){
-        String print = "\nName: " + this.name + " // CPF: " + imprimeCPF(this.CPF);
+        String print = "Name: " + this.name + " // CPF: " + imprimeCPF(this.CPF);
         print += " // Type: Client" + "\n";
         if(!drinkLike.isEmpty()){
             print+= "Drinks that " + name + " like:\n// ";

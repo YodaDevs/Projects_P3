@@ -2,7 +2,9 @@ package app.views.adminscreen.options;
 
 import app.Drinks;
 import app.ExceptionHandling;
-import app.persontypes.*;
+import app.person.clientperson.*;
+import app.person.barmanperson.*;
+import app.person.securityguardperson.*;
 import app.views.adminscreen.AdminScreen;
 
 public class OptionsA extends AdminScreen {
@@ -22,34 +24,32 @@ public class OptionsA extends AdminScreen {
                     String type = ExceptionHandling.readString();
                     
                     if(type.equalsIgnoreCase("admin")){
-
-                        Admin nameA = new Admin(null);
-                        getAdmin().add(nameA, dataList.getPersonList());
+                        adminPerson.add(adminPerson, dataList.getPersonList());
 
                     }
                     else if(type.equalsIgnoreCase("client")){
 
                         Client nameB = new Client(null);
-                        getAdmin().add(nameB, dataList.getPersonList());
+                        adminPerson.add(nameB, dataList.getPersonList());
 
                     }
                     else if(type.equalsIgnoreCase("barman")){
 
                         Barman nameC = new Barman(null);
-                        getAdmin().add(nameC, dataList.getPersonList());
+                        adminPerson.add(nameC, dataList.getPersonList());
 
                     }
                     else if(type.equalsIgnoreCase("security")){
 
                         SecurityGuard nameD = new SecurityGuard(null);
-                        getAdmin().add(nameD, dataList.getPersonList());
+                        adminPerson.add(nameD, dataList.getPersonList());
 
                     }
                     break;
                     
                 case 2:
                     Drinks newDrink = new Drinks();
-                    getAdmin().add(newDrink, dataList.getDrinksList());
+                    adminDrinks.add(newDrink, dataList.getDrinksList());
                     break;
                 
                 case 0:

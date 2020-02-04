@@ -4,17 +4,20 @@ import java.util.ArrayList;
 
 import app.ExceptionHandling;
 import app.*;
+import app.person.*;
 import app.data.*;
-import app.persontypes.*;
+import app.person.adminperson.*;
 import app.views.adminscreen.options.*;
 
 public class AdminScreen {
 
     public DataSingleton dataList = DataSingleton.getInstance();
     public UserSingleton userInstance = UserSingleton.getInstance();
+    public AdminPerson adminPerson = new AdminPerson();
+    public AdminDrinks adminDrinks = new AdminDrinks();
 
-    public Admin getAdmin() {
-        return (Admin) userInstance.getUser();
+    public AdminAbstract getAdmin() {
+        return (AdminAbstract) userInstance.getUser();
     }
 
     public DataSingleton getDataList() {

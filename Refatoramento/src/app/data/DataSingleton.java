@@ -1,6 +1,7 @@
 package app.data;
 
 import java.util.ArrayList;
+import app.person.*;
 import app.*;
 
 public class DataSingleton {

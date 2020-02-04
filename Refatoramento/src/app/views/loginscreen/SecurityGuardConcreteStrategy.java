@@ -1,6 +1,6 @@
 package app.views.loginscreen;
 
-import app.Person;
+import app.person.*;
 import app.data.UserSingleton;
 import app.views.securityguardscreen.SecurityGuardScreen;
 

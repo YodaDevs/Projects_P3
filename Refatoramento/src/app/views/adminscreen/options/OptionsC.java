@@ -16,13 +16,13 @@ public class OptionsC extends AdminScreen {
             if(op == 5){
                     System.out.println("What the name of person?");
                     String person = ExceptionHandling.readString();
-                    getAdmin().remove(person, getPersonList());
+                    adminPerson.remove(person, getPersonList());
             }
             else if ( op == 6){
                     System.out.println("What the name of drink?");
                     Drinks drinkA = new Drinks();
                     drinkA.setName(ExceptionHandling.readString());
-                    getAdmin().remove(drinkA, getDrinksList());
+                    adminDrinks.remove(drinkA, getDrinksList());
             }
             else if ( op == 7){
                    getAdmin().reportData(getDrinksList(),getPersonList());

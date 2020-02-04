@@ -30,7 +30,9 @@ public class HomeContext {
     }
  
     public void startHomeStrategy() {
-        
+
+        dataList.fakeData();
+
         while(true) {
             System.out.println("(1) - Sign in");
             System.out.println("(0) - Exit");

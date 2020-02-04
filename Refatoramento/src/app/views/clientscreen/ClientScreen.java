@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import app.ExceptionHandling;
 import app.*;
+import app.person.*;
 import app.data.*;
-import app.persontypes.*;
+import app.person.clientperson.*;
 
 public class ClientScreen {
 

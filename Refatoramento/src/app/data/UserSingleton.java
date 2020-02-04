@@ -1,6 +1,6 @@
 package app.data;
 
-import app.*;
+import app.person.*;
 
 public class UserSingleton {
 

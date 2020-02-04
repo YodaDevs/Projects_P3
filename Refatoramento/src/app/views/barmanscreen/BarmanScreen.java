@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import app.ExceptionHandling;
 import app.*;
 import app.data.*;
-import app.persontypes.*;
+import app.person.barmanperson.*;
 
 public class BarmanScreen {
 

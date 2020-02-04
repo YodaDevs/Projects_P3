@@ -1,7 +1,10 @@
 package app;
 
 import app.data.DataSingleton;
-import app.persontypes.*;
+import app.person.adminperson.*;
+import app.person.clientperson.*;
+import app.person.barmanperson.*;
+import app.person.securityguardperson.*;
 
 public class FakeData {
 
@@ -56,7 +59,7 @@ public class FakeData {
 
         user.getDrinksList().add(drink4);
 
-        Admin adminA = new Admin(null);
+        AdminAbstract adminA = new AdminPerson();
         adminA.setName("Admin");
         adminA.setCPF("02855704472");
         adminA.setPassword("123");
