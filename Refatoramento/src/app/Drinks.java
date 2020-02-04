@@ -10,7 +10,7 @@ public class Drinks {
     private int rank;
 
 
-    Drinks(){
+    public Drinks(){
         this.rank = 0;
         this.priceDrink = -1;
     }

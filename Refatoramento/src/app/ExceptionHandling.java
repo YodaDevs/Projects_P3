@@ -66,6 +66,21 @@ public class ExceptionHandling {
 			}
 		}
 		
+    }
+    
+    public static String readString() {
+		input = new Scanner(System.in);
+		
+		while (true) {
+			try {
+				String value = input.nextLine();
+				return value;
+				
+			} catch (InputMismatchException e) {
+				System.out.println("Error: Invalid input. Try again.");
+            }
+		}
+		
 	}
 
 	public static boolean isCPF(String CPF) {

@@ -4,18 +4,10 @@ import app.data.*;
 
 public abstract class LoginStrategy {
 
-    public Data dataList = null;
+    public DataSingleton dataList = DataSingleton.getInstance();
 
-    public void setDataList(Data dataList) {
-        this.dataList = dataList;
-    }
-    
-    public Data getDataList() {
+    public DataSingleton getDataList() {
         return this.dataList;
-    }
-
-    public void importData(Data dataList){
-        setDataList(dataList);
     }
 
     /* 

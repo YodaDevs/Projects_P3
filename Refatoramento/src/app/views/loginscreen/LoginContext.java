@@ -1,50 +1,68 @@
 package app.views.loginscreen;
 
-import java.util.Scanner;
+import app.ExceptionHandling;
+import app.Person;
 import app.data.*;
+import app.persontypes.*;
 
 public class LoginContext {
      
-    private LoginStrategy loginStrategy = new ExitConcreteStrategy();
-    Data dataList = null;
+    private LoginStrategy loginStrategy = null;
+    private DataSingleton dataLists = DataSingleton.getInstance();
      
     public void configureHome() {
-        getHomeStrategy().importData(getDataList());
         getHomeStrategy().loginSelect();
     }
- 
+
     public LoginStrategy getHomeStrategy() {
         return this.loginStrategy;
     }
+
+    public void setLoginStrategy (LoginStrategy login) {
+        this.loginStrategy = login;
+    }
  
-    public void setloginStrategy(LoginStrategy loginStrategy) {
-        if ( loginStrategy == null) return;
-        this.loginStrategy = loginStrategy;
+    public boolean configureloginStrategy(Person user) {
+        if ( user == null){ 
+            System.out.println("Sorry, but it's incorrect CPF or Password, try again");
+            return false;
+        }
+        if( user instanceof Admin) {
+            setLoginStrategy(new AdminConcreteStrategy(user));
+        }
+        else if( user instanceof Client){
+            setLoginStrategy(new ClientConcreteStrategy(user));
+        }
+        else if(user instanceof Barman){
+            setLoginStrategy(new BarmanConcreteStrategy(user));
+        }
+        else if(user instanceof SecurityGuard){
+            setLoginStrategy(new SecurityGuardConcreteStrategy(user));
+        }
+        return true;
     }
-
-    public void setDataList(Data dataList) {
-        this.dataList = dataList;
-    }
-
-    public Data getDataList() {
-        return this.dataList;
+    public void cleanLoginContext(){
+        this.loginStrategy = null;
     }
 
     public void startHomeStrategy() {
-
+        
+        dataLists.fakeData();
+        
         while(true){
 
-            Scanner input = new Scanner(System.in);
-
             System.out.println("CPF:");
-            String cpf = input.nextLine();
+            String cpf = ExceptionHandling.readString();
 
             System.out.println("Password:");
-            String password = input.nextLine();
+            String password = ExceptionHandling.readString();
 
-            //setloginStrategy(getDataList().getUserFromTheList(cpf, password)); 
+            if(configureloginStrategy(dataLists.getUserFromTheList(cpf, password))){
+                configureHome();
+                cleanLoginContext();    
+                break;
+            }
 
-            configureHome();
         }
     }
  

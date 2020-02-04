@@ -6,10 +6,9 @@ import app.data.*;
 public class HomeContext {
      
     private HomeStrategy homeStrategy = new ExitConcreteStrategy();
-    Data dataList = Data.getInstance();
+    DataSingleton dataList = DataSingleton.getInstance();
      
     public void configureHome() {
-        getHomeStrategy().importData(getDataList());
         getHomeStrategy().homeSelect();
     }
  
@@ -22,7 +21,7 @@ public class HomeContext {
         this.homeStrategy = homeStrategy;
     }
 
-    public Data getDataList() {
+    public DataSingleton getDataList() {
         return this.dataList;
     }
 
@@ -30,17 +29,19 @@ public class HomeContext {
         this.homeStrategy = new ExitConcreteStrategy();
     }
  
-    public void startHomeStrategy() {  
+    public void startHomeStrategy() {
+        
+        while(true) {
+            System.out.println("(1) - Sign in");
+            System.out.println("(0) - Exit");
+        
+            if(ExceptionHandling.readInt() == 1){
+                setHomeStrategy(new SignConcreteStrategy());
+            }
 
-        System.out.println("(1) - Sign in");
-        System.out.println("(0) - Exit");
-    
-        if(ExceptionHandling.readInt() == 1){
-            setHomeStrategy(new SignConcreteStrategy());
             configureHome();
+            cleanHomeContext();
         }
-
-        configureHome();
     }
  
 }

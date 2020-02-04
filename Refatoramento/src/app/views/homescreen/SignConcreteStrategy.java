@@ -12,7 +12,6 @@ public class SignConcreteStrategy extends HomeStrategy {
 
     @Override
     public void homeSelect() {
-        getLogin().setDataList(getDataList());
         getLogin().startHomeStrategy();
     }
      

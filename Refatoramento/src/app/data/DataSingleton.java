@@ -2,36 +2,35 @@ package app.data;
 
 import java.util.ArrayList;
 import app.*;
-import app.views.loginscreen.LoginStrategy;
 
-public class Data {
+public class DataSingleton {
 
-    private ArrayList<LoginStrategy> list = null;                                                      
-    private ArrayList<Drinks> drinks = null;
-    private static Data single_instance = null; 
+    public ArrayList<Person> list = new ArrayList<Person>();                                                      
+    public ArrayList<Drinks> drinks = new ArrayList<Drinks>();
+    private static DataSingleton single_instance = null; 
+    public FakeData fakeD = new FakeData();
   
     // variable of type String 
     public String s; 
   
     // private constructor restricted to this class itself 
-    private Data() { 
-        list = new ArrayList<LoginStrategy>();                                                      
-        drinks = new ArrayList<Drinks>();
+    private DataSingleton() { 
+        
     } 
   
     // static method to create instance of Singleton class 
-    public static Data getInstance() { 
+    public static DataSingleton getInstance() { 
 
-        if (single_instance == null) 
-            single_instance = new Data(); 
-
+        if (single_instance == null){ 
+            single_instance = new DataSingleton();
+        }
         return single_instance; 
     } 
 
     /**
      * @return the List
      */
-    public ArrayList<LoginStrategy> getPersonList() {
+    public ArrayList<Person> getPersonList() {
         return this.list;
     }
 
@@ -40,6 +39,10 @@ public class Data {
      */
     public ArrayList<Drinks> getDrinksList() {
         return this.drinks;
+    }
+
+    public void fakeData(){
+        fakeD.generateData(single_instance);
     }
 
     /** 
@@ -55,13 +58,12 @@ public class Data {
         }
     }
 
-    //need to change Person to LoginStrategy
-    public LoginStrategy getUserFromTheList(String cpf, String password){
+    public Person getUserFromTheList(String cpf, String password){
 
-        for(LoginStrategy person : getPersonList()) {
-            /*if(person.getCPF().equals(cpf) && person.getPassword().equals(password)){
+        for(Person person : getPersonList()) {
+            if(person.getCPF().equals(cpf) && person.getPassword().equals(password)){
                 return person;
-            }*/
+            }
         }
         return null;
     }

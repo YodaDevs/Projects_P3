@@ -4,20 +4,21 @@ import app.data.*;
 
 public abstract class HomeStrategy {
     
-    public Data dataList = null;
+    public DataSingleton dataList = null;
 
-    public void setDataList(Data dataList) {
+    public void setDataList(DataSingleton dataList) {
         this.dataList = dataList;
     }
 
-    public Data getDataList() {
+    public DataSingleton getDataList() {
         return this.dataList;
+    }
+
+    public void importData(DataSingleton dataList){
+        setDataList(dataList);
     }
 
     public abstract void homeSelect();
 
-    public void importData(Data dataList){
-        setDataList(dataList);
-    }
      
 }
